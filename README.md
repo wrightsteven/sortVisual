@@ -1,5 +1,7 @@
 # sortvisual
-Randomly generates array and sorts in ascending order. Sorting shown on graph.
+Randomly generates array and sorts in ascending order. 
+
+Still figuring out how to get sorting shown on graph.
 
 Written in python 3, uses matplotlib to generate graph.
 
