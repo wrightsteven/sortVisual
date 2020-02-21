@@ -1,47 +1,62 @@
-import random
+from random import randint
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-import time
 
 #Bubble sort to put array in order
 def bubbleSort(array):
-    for i in range(size):
-        for j in range(0, size-i-1):
+    swapped = True
+    for i in range(len(array)-1):
+        if not swapped:
+            break
+
+        swapped = False
+
+        for j in range(0, size-1-i):
             if array[j] > array[j+1]:
                 array[j], array[j+1] = array[j+1], array[j]
+                swapped = True
 
-#Create array
-size = int(input("Pick an integer from 50 to 100: "))
+            yield array
 
-while size < 50 or size > 100:
-    size = int(input("Please enter a valid input: "))
+if __name__ == "__main__":
+    #Create array
+    size = int(input("Pick an integer from 50 to 100: "))
 
-array = []
+    while size < 50 or size > 100:
+        size = int(input("Please enter a valid input: "))
 
-for i in range(size):
-    value = random.randint(1,100)
-    array.append(value)
-print(array)
+    A = []
 
-#Create graph for sort visualizer
-fig, ax = plt.subplots()
-ax.set_title("Sort Visualizer")
+    for i in range(size):
+        value = randint(1,100)
+        A.append(value)
+    print(A)
 
-ax.set_xlim(0, size)
-ax.set_ylim(0, 100)
+    method = bubbleSort(A)
+    
+    #Create graph for sort visualizer
+    fig, ax = plt.subplots()
+    ax.set_title("Bubble Sort")
 
-bars = ax.bar(range(len(array)), array, align = "edge")
-zipped = zip(bars, array)
+    ax.set_xlim(0, size)
+    ax.set_ylim(0, 100)
 
-#Function to update graph
-count = [0]
-def update_fig(array, bars, count):
-    for bar,val in zipped:
-        bar.set_height(val)
-    count[0] += 1
+    bars = ax.bar(range(len(A)), A, align="edge")
+    zipped = zip(bars, A)
 
-#Animation for graph
-ani = animation.FuncAnimation(fig, func=update_fig, fargs=(bars, count), frames=bubbleSort(array), interval=1, repeat=False)
+    text = ax.text(0.02, 0.95, "", transform=ax.transAxes)
 
-#Show graph
-plt.show()
+    #Function to update graph, use 'next' to get each step in the algorithm
+    count = [0]
+    def update(A, bars, count):
+        currentList = next(method)
+        for i in range(len(bars)):
+            bars[i].set_height(currentList[i])
+        count[0] += 1
+        text.set_text("Number of operations: " + str(count))
+
+    #Animation for graph
+    ani = animation.FuncAnimation(fig, func=update, fargs=(bars, count), frames=method, interval=1, repeat=False)
+
+    #Show graph
+    plt.show()
