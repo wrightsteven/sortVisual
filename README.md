@@ -1,4 +1,4 @@
-# sortvisual
+# Bubble Sort Visualizer
 Randomly generates array and sorts in ascending order. 
 
 Written in python 3, uses matplotlib to generate graph.
