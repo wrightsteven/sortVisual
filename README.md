@@ -1,8 +1,11 @@
-# Bubble Sort Visualizer
-Randomly generates array and sorts in ascending order. 
+# Sort Visualizer
 
-Written in python 3, uses matplotlib to generate graph.
+Steven Wright
 
-Uses Matplotlib's animation function to show sorting on graph.
+Python 3.7.3
 
-Array size is 50-100 integers, exact amount is chosen by user by user.
+# Usage
+Run command:
+
+```
+python3 sortvisual2.py
